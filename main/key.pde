@@ -1,6 +1,8 @@
 class Key {
   float startX, startY,  endX, endY;
   String value;
+  boolean isCapital;
+
 
   Key(float startX, float startY, float endX, float endY, String value) {
     this.startX = startX;
@@ -8,6 +10,7 @@ class Key {
     this.endX = endX;
     this.endY = endY;
     this.value = value;
+    this.isCapital = false;
   }
 
   void display() {
@@ -17,7 +20,11 @@ class Key {
     rect(startX, startY, endX, endY);
     textSize(16);
     fill(0);
-    text(value, startX, endY); 
+    String val = value;
+    if (isCapital) {
+      val = val.toUpperCase();
+    }
+    text(val, startX, endY); 
   }
   
   boolean overKey() {
