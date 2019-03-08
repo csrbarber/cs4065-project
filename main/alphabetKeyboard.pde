@@ -1,4 +1,4 @@
-class Alphabet {
+class Alphabet implements Keyboard {
   float startX, startY,  endX, endY;
   ArrayList<Key> keys;
   boolean isCapital;
@@ -42,4 +42,9 @@ class Alphabet {
         }
     }
   }
+  
+  ArrayList<Key> getKeys() {
+    return keys;
+  }
+
 }
