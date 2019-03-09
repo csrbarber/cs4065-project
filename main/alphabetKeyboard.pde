@@ -46,5 +46,27 @@ class Alphabet implements Keyboard {
   ArrayList<Key> getKeys() {
     return keys;
   }
-
+  
+  String handleInput() {
+    String ret = "";
+    for (Key kkey : getKeys()) {
+      if (kkey.overKey()) {
+        if (kkey.value == "Enter") {
+          ret = "\n";
+        } else if (kkey.value == "Space") {
+          ret = " ";
+        } else if (kkey.value == "Shift") {
+          if (alphabetKeyboard.isCapital) {
+            isCapital = false;
+          } else {
+            isCapital = true;
+          }
+        } else {
+          ret = kkey.printKey();
+          break;
+        }
+      }
+    }
+    return ret;
+  }
 }

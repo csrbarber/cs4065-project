@@ -3,7 +3,6 @@ class Key {
   String value;
   boolean isCapital;
 
-
   Key(float startX, float startY, float endX, float endY, String value) {
     this.startX = startX;
     this.startY = startY;
@@ -25,6 +24,13 @@ class Key {
       val = val.toUpperCase();
     }
     text(val, startX, endY); 
+  }
+  
+  String printKey() {
+    if (isCapital) {
+      return value.toUpperCase();
+    }
+    return value;
   }
   
   boolean overKey() {

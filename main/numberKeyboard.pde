@@ -30,4 +30,15 @@ class Number implements Keyboard {
   ArrayList<Key> getKeys() {
     return keys;
   }
+  
+  String handleInput() {
+    String ret = "";
+    for (Key kkey : getKeys()) {
+      if (kkey.overKey()) {
+        ret = kkey.printKey();
+        break;
+      }
+    }
+    return ret;
+  }
 }

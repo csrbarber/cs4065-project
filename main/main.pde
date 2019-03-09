@@ -30,32 +30,12 @@ void mousePressed() {
     text = ""; 
   }
   
-  // TODO Get out of numberKeyboard after a selection
+  //Handle button presses
   if (numberButton.overButton()) {
     activeKeyboard = numberKeyboard;
-  }
-  
-  for (Key kkey : activeKeyboard.getKeys()) {
-    if (kkey.overKey()) {
-      if (kkey.value == "Enter") {
-        text += "\n";
-      } else if (kkey.value == "Space") {
-        text += " ";
-      } else if (kkey.value == "Shift") {
-        if (alphabetKeyboard.isCapital) {
-          alphabetKeyboard.isCapital = false;
-        } else {
-          alphabetKeyboard.isCapital = true;
-        }
-      } else {
-        // TODO should just change the value on the key so we don't have to do this check
-        if (alphabetKeyboard.isCapital) {
-          text += kkey.value.toUpperCase();
-          alphabetKeyboard.isCapital = false;
-        } else {
-          text += kkey.value;
-        }
-      }
-    }
+  } else {
+    // Handle input
+    text += activeKeyboard.handleInput();
+    activeKeyboard = alphabetKeyboard;
   }
 }
