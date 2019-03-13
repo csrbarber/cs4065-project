@@ -23,7 +23,8 @@ class Key {
     if (isCapital) {
       val = val.toUpperCase();
     }
-    text(val, startX, endY); 
+    float midY = startY + (endY - startY)/2;
+    text(val, startX, midY); 
   }
   
   String printKey() {

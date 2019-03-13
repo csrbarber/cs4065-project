@@ -20,9 +20,7 @@ class Alphabet implements Keyboard {
     }
   }
   
-  // TODO Deal with Enter, Shift, and Space keys
   void initializeKeys() {
-    // 4 rows
     float hDiv = (endY - startY)/4;
     String[] firstRow = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"};
     String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter"};
@@ -33,7 +31,6 @@ class Alphabet implements Keyboard {
     rows.add(secondRow);
     rows.add(thirdRow);
     rows.add(fourthRow);
-
     
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;

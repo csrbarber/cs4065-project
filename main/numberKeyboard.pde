@@ -1,8 +1,8 @@
-class Number implements Keyboard {
+class NumberSymbol implements Keyboard {
   float startX, startY,  endX, endY;
   ArrayList<Key> keys;
 
-  Number(float startX, float startY, float endX, float endY) {
+  NumberSymbol(float startX, float startY, float endX, float endY) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
@@ -18,12 +18,20 @@ class Number implements Keyboard {
   }
   
   void initializeKeys() {
-    String[] numbers = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
     float hDiv = (endY - startY)/4;
-    float wDiv = (endX - startX)/numbers.length;
-
-    for (int i = 0; i < numbers.length; i++) {
-      keys.add(new Key(startX + wDiv*i, startY, startX + wDiv*(i+1), startY + hDiv, numbers[i]));
+    String[] firstRow = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "[", "]", "{", "}", "#", "%", "^", "*", "+", "="};
+    String[] secondRow = new String[]{"-", "/", ":", ";", "(", ")", "$", "&", "@", "\"", "_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"};
+    String[] thirdRow = new String[]{".", ",", "?", "!", "'"};
+    ArrayList<String[]> rows = new ArrayList<String[]>();
+    rows.add(firstRow);
+    rows.add(secondRow);
+    rows.add(thirdRow);
+    
+    for (int i = 0; i < rows.size(); i++) {
+        float wDiv = (endX - startX)/rows.get(i).length;
+        for (int j = 0; j < rows.get(i).length; j++) {
+          keys.add(new Key(startX + wDiv*j, startY + hDiv*i, startX + wDiv*(j+1), startY + hDiv*(i+1), rows.get(i)[j]));
+        }
     }
   }
   
