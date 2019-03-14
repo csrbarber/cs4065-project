@@ -17,15 +17,12 @@ class Emoji implements Keyboard {
     }
   }
   
-  // TODO Deal with Enter, Shift, and Space keys
   void initializeKeys() {
-    // 4 rows
-    float hDiv = (endY - startY)/8;
+    // Vaishu: will add all of the other emojis once we can get the first row to print out properly
     String[] firstRow = new String[]{"1f61e.png", "1f618.png", "1f92e.png", "1f61c.png",  
                                       "1f951.png", "1f351.png", "1f34e.png", "1f34c.png", 
                                      "1f3e5.png", "1f6a6.png", "1f6b2.png", "1f6f4.png", 
                                      "1f525.png", "26a1.png", "2744.png", "1f308.png"};
-    // vaishu: will add all of the other emojis once we can get the first row to print out properly
     String[] secondRow = new String[]{"1f602.png", "1f62c.png", "1f600.png", "1f621.png",
                                       "1f355.png", "1f354.png", "1f336.png", "1f346.png", 
                                       "26ea.png", "26f5.png", "2708.png",  "1f3e1.png", 
@@ -37,10 +34,7 @@ class Emoji implements Keyboard {
     String[] fourthRow = new String[]{"1f60f.png", "1f612.png", "1f609.png", "1f60e.png",
                                       "1f37e.png", "2615.png", "1f37a.png", "1f369.png", 
                                       "1f692.png", "1f693.png", "1f695.png", "1f697.png", 
-                                      "1f384.png", "1f333.png", "1f40d.png", "1f425.png"};
-                                      
-    // replicated the first four rows until I can organize the emojis again
-    
+                                      "1f384.png", "1f333.png", "1f40d.png", "1f425.png"};                                      
     String[] fifthRow = new String[]{"1f3a4.png", "1f3ae.png", "1f3b1.png", "1f3be.png",
                                      "267b.png", "2122.png", "2764.png", "203c.png", 
                                      "1f389.png", "23f3.png", "231a.png", "2709.png", 
@@ -66,7 +60,8 @@ class Emoji implements Keyboard {
     rows.add(sixthRow);
     rows.add(seventhRow);
     rows.add(eighthRow);
-
+    
+    float hDiv = (endY - startY)/rows.size();
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {

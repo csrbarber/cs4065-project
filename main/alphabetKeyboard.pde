@@ -20,11 +20,10 @@ class Alphabet implements Keyboard {
     }
   }
   
+  // TODO Forgot back key (thirdRow)
   void initializeKeys() {
-    float hDiv = (endY - startY)/4;
     String[] firstRow = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"};
     String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l"};
-    // TODO Forgot back key
     String[] thirdRow = new String[]{"Shift", "z", "x", "c", "v", "b", "n", "m"};
     String[] fourthRow = new String[]{"Space", "Enter"};
     ArrayList<String[]> rows = new ArrayList<String[]>();
@@ -32,7 +31,8 @@ class Alphabet implements Keyboard {
     rows.add(secondRow);
     rows.add(thirdRow);
     rows.add(fourthRow);
-
+  
+    float hDiv = (endY - startY)/rows.size();
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {
