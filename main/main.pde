@@ -9,16 +9,17 @@ float zoomX, zoomY;
 float xoff, yoff;
 
 void setup() {
-  size(800, 800);
+  // Dimensions of test Android phone
+  size(480, 800);
   background(209, 214, 218);
   zoom = false;
   text = "";
   numZoom = 1;
   zoomScale = 2;
-  alphabetKeyboard = new Alphabet(0, 300, 800, 700);
-  numberSymbolKeyboard = new NumberSymbol(0, 300, 800, 700);
+  alphabetKeyboard = new Alphabet(0, 300, 480, 700);
+  numberSymbolKeyboard = new NumberSymbol(0, 300, 480, 700);
   numberButton = new Button(50, 725, 150, 775, "0-9");
-  clearTextButton = new Button(650, 725, 750, 775, "Clear");
+  clearTextButton = new Button(350, 725, 450, 775, "Clear");
   activeKeyboard = alphabetKeyboard;
 }
 
