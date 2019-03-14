@@ -12,12 +12,13 @@ class Button {
 
   void display() {
     rectMode(CORNERS);
-    stroke(150);
-    fill(100);
+    stroke(0);
+    fill(225);
     rect(startX, startY, endX, endY);
     textSize(32);
     fill(0);
-    text(text, startX, endY); 
+    float midY = startY + (endY - startY)/2;
+    text(text, startX, midY); 
   }
   
   boolean overButton() {

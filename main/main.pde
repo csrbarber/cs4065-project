@@ -1,37 +1,42 @@
 String text;
-Button clearTextButton, numberButton, zoomTestButton;
+Button clearTextButton, numberButton;
 Alphabet alphabetKeyboard;
-Number numberKeyboard;
+NumberSymbol numberSymbolKeyboard;
 Keyboard activeKeyboard;
 boolean zoom;
+int numZoom, zoomScale;
+float zoomX, zoomY;
+float xoff, yoff;
 
 void setup() {
-  size(800, 800);
-  background(240);
+  // Dimensions of test Android phone
+  size(480, 800);
+  background(209, 214, 218);
   zoom = false;
   text = "";
-  clearTextButton = new Button(700, 0, 800, 100, "Clear");
-  zoomTestButton = new Button(600, 0, 700, 100, "Zoom");
-  alphabetKeyboard = new Alphabet(0, 300, 800, 700);
-  numberKeyboard = new Number(0, 300, 800, 700);
+  numZoom = 1;
+  zoomScale = 2;
+  alphabetKeyboard = new Alphabet(0, 300, 480, 700);
+  numberSymbolKeyboard = new NumberSymbol(0, 300, 480, 700);
   numberButton = new Button(50, 725, 150, 775, "0-9");
+  clearTextButton = new Button(350, 725, 450, 775, "Clear");
   activeKeyboard = alphabetKeyboard;
 }
 
 void draw() {
   if (zoom) {
-    translate(width/2, height/2);
-    scale(2);
-    translate(-mouseX, -mouseY);
+    translate(zoomX, zoomY);
+    scale(zoomScale);
   }
-  background(240);
+  
+  background(209, 214, 218);
   textSize(32);
-  fill(0, 102, 153);
-  text(text, 50, 50);
+  fill(0);
+  // TODO Text scrolling & wrapping
+  text(text, 10, 40);
   clearTextButton.display();
-  zoomTestButton.display();
-  numberButton.display();  
-  activeKeyboard.display();
+  numberButton.display();
+  activeKeyboard.display(); //<>//
 }
 
 void mousePressed() {
@@ -41,16 +46,27 @@ void mousePressed() {
   
   //Handle button presses
   if (numberButton.overButton()) {
-    activeKeyboard = numberKeyboard;
+    if (activeKeyboard instanceof NumberSymbol) {
+      activeKeyboard = alphabetKeyboard;
+    } else {
+      activeKeyboard = numberSymbolKeyboard;
+    }
   } else {
     // Handle input
-    text += activeKeyboard.handleInput();
-    activeKeyboard = alphabetKeyboard;
+    if (activeKeyboard instanceof NumberSymbol) {
+      if (zoom) {
+        // If already zoomed type selected key then switch keyboards
+        text += activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
+        activeKeyboard = alphabetKeyboard;
+        zoom = false;
+      } else {
+        zoom = true;
+        zoomX = (width/2) - mouseX*2;
+        zoomY = (height/2) - mouseY*2;
+      }
+    } else {
+      // If alphabetKeyboard simply handleInput
+      text += activeKeyboard.handleInput(0, 0, 1);
+    }
   }
-  
-  zoom = true;
-}
-
-void mouseReleased() {
-  zoom = false;
 }

@@ -20,20 +20,18 @@ class Alphabet implements Keyboard {
     }
   }
   
-  // TODO Deal with Enter, Shift, and Space keys
   void initializeKeys() {
-    // 4 rows
     float hDiv = (endY - startY)/4;
     String[] firstRow = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"};
-    String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter"};
-    String[] thirdRow = new String[]{"z", "x", "c", "v", "b", "n", "m", ",", ".", "Shift"};
-    String[] fourthRow = new String[]{"Space"};
+    String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l"};
+    // TODO Forgot back key
+    String[] thirdRow = new String[]{"Shift", "z", "x", "c", "v", "b", "n", "m"};
+    String[] fourthRow = new String[]{"Space", "Enter"};
     ArrayList<String[]> rows = new ArrayList<String[]>();
     rows.add(firstRow);
     rows.add(secondRow);
     rows.add(thirdRow);
     rows.add(fourthRow);
-
     
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
@@ -47,10 +45,10 @@ class Alphabet implements Keyboard {
     return keys;
   }
   
-  String handleInput() {
+  String handleInput(float xOffset, float yOffset, int zoomScale) {
     String ret = "";
     for (Key kkey : getKeys()) {
-      if (kkey.overKey()) {
+      if (kkey.overKey(xOffset, yOffset, zoomScale)) {
         if (kkey.value == "Enter") {
           ret = "\n";
         } else if (kkey.value == "Space") {
@@ -63,10 +61,12 @@ class Alphabet implements Keyboard {
           }
         } else {
           ret = kkey.printKey();
+          isCapital = false;
           break;
         }
       }
     }
+    
     return ret;
   }
 }
