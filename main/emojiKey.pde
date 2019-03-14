@@ -20,7 +20,10 @@ class EmojiKey extends Key{
   }
   
   String printKey() {
-    return value.substring(0, 5);
+    if(value.substring(0, 1).equals("2"))
+      return value.substring(0, 4);
+    else
+      return value.substring(0, 5);
   }
    
 }
