@@ -23,9 +23,10 @@ class Alphabet implements Keyboard {
   void initializeKeys() {
     float hDiv = (endY - startY)/4;
     String[] firstRow = new String[]{"q", "w", "e", "r", "t", "y", "u", "i", "o", "p"};
-    String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter"};
-    String[] thirdRow = new String[]{"z", "x", "c", "v", "b", "n", "m", ",", ".", "Shift"};
-    String[] fourthRow = new String[]{"Space"};
+    String[] secondRow = new String[]{"a", "s", "d", "f", "g", "h", "j", "k", "l"};
+    // TODO Forgot back key
+    String[] thirdRow = new String[]{"Shift", "z", "x", "c", "v", "b", "n", "m"};
+    String[] fourthRow = new String[]{"Space", "Enter"};
     ArrayList<String[]> rows = new ArrayList<String[]>();
     rows.add(firstRow);
     rows.add(secondRow);
@@ -44,10 +45,10 @@ class Alphabet implements Keyboard {
     return keys;
   }
   
-  String handleInput() {
+  String handleInput(float xOffset, float yOffset, int zoomScale) {
     String ret = "";
     for (Key kkey : getKeys()) {
-      if (kkey.overKey()) {
+      if (kkey.overKey(xOffset, yOffset, zoomScale)) {
         if (kkey.value == "Enter") {
           ret = "\n";
         } else if (kkey.value == "Space") {

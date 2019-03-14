@@ -39,10 +39,13 @@ class NumberSymbol implements Keyboard {
     return keys;
   }
   
-  String handleInput() {
+  String handleInput(float xOffset, float yOffset, int zoomScale) {
     String ret = "";
     for (Key kkey : getKeys()) {
-      if (kkey.overKey()) {
+      if (kkey.overKey(xOffset, yOffset, zoomScale)) {
+        print(xOffset + "xOffset\n");
+        print(yOffset + "yOffset\n");
+        print(zoomScale + "zoomScale\n");
         ret = kkey.printKey();
         break;
       }

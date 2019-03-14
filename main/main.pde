@@ -6,35 +6,35 @@ Keyboard activeKeyboard;
 boolean zoom;
 int numZoom, zoomScale;
 float zoomX, zoomY;
+float xoff, yoff;
 
 void setup() {
   size(800, 800);
-  background(240);
+  background(209, 214, 218);
   zoom = false;
   text = "";
   numZoom = 1;
   zoomScale = 2;
-  clearTextButton = new Button(700, 0, 800, 100, "Clear");
   alphabetKeyboard = new Alphabet(0, 300, 800, 700);
   numberSymbolKeyboard = new NumberSymbol(0, 300, 800, 700);
   numberButton = new Button(50, 725, 150, 775, "0-9");
+  clearTextButton = new Button(650, 725, 750, 775, "Clear");
   activeKeyboard = alphabetKeyboard;
 }
 
 void draw() {
   if (zoom) {
-    translate(width/2, height/2);
-    scale(zoomScale);
     translate(zoomX, zoomY);
+    scale(zoomScale);
   }
   
-  background(240);
+  background(209, 214, 218);
   textSize(32);
-  fill(0, 102, 153);
+  fill(0);
   text(text, 50, 50);
   clearTextButton.display();
   numberButton.display();
-  activeKeyboard.display();
+  activeKeyboard.display(); //<>//
 }
 
 void mousePressed() {
@@ -54,21 +54,17 @@ void mousePressed() {
     if (activeKeyboard instanceof NumberSymbol) {
       if (zoom) {
         // If already zoomed type selected key then switch keyboards
-        text += activeKeyboard.handleInput();
+        text += activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
         activeKeyboard = alphabetKeyboard;
         zoom = false;
       } else {
         zoom = true;
-        zoomX = -mouseX;
-        zoomY = -mouseY;
+        zoomX = (width/2) - mouseX*2;
+        zoomY = (height/2) - mouseY*2;
       }
     } else {
       // If alphabetKeyboard simply handleInput
-      text += activeKeyboard.handleInput();
+      text += activeKeyboard.handleInput(0, 0, 1);
     }
   }
-}
-
-void mouseReleased() {
-  //zoom = false;
 }
