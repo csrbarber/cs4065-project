@@ -1,41 +1,45 @@
 String text;
-Button clearTextButton, numberButton, zoomTestButton, emojiButton;
-Alphabet alphabetKeyboard;
-Number numberKeyboard;
-// vaishu
+Button clearTextButton, numberButton, emojiButton;
 Emoji emojiKeyboard;
+Alphabet alphabetKeyboard;
+NumberSymbol numberSymbolKeyboard;
 Keyboard activeKeyboard;
 boolean zoom;
+int numZoom, zoomScale;
+float zoomX, zoomY;
+float xoff, yoff;
 
 void setup() {
-  size(800, 800);
-  background(240);
+  // Dimensions of test Android phone
+  size(480, 800);
+  background(209, 214, 218);
   zoom = false;
   text = "";
-  clearTextButton = new Button(700, 0, 800, 100, "Clear");
-  zoomTestButton = new Button(600, 0, 700, 100, "Zoom");
-  alphabetKeyboard = new Alphabet(0, 300, 800, 700);
-  numberKeyboard = new Number(0, 300, 800, 700);
+  numZoom = 1;
+  zoomScale = 2;
+  alphabetKeyboard = new Alphabet(0, 300, 480, 700);
+  numberSymbolKeyboard = new NumberSymbol(0, 300, 480, 700);
   emojiKeyboard = new Emoji(0, 300, 800, 700);
-  numberButton = new Button(50, 725, 150, 775, "0-9");
   emojiButton = new EmojiButton(150, 725, 250, 775, "smirking-face_1f60f.png");
+  numberButton = new Button(50, 725, 150, 775, "0-9");
+  clearTextButton = new Button(350, 725, 450, 775, "Clear");
   activeKeyboard = alphabetKeyboard;
 }
 
 void draw() {
   if (zoom) {
-    translate(width/2, height/2);
-    scale(2);
-    translate(-mouseX, -mouseY);
+    translate(zoomX, zoomY);
+    scale(zoomScale);
   }
-  background(240);
+  
+  background(209, 214, 218);
   textSize(32);
-  fill(0, 102, 153);
-  text(text, 50, 50);
+  fill(0);
+  // TODO Text scrolling & wrapping
+  text(text, 10, 40);
   clearTextButton.display();
-  zoomTestButton.display();
-  numberButton.display();  
   emojiButton.display();
+  numberButton.display();
   activeKeyboard.display();
 }
 
@@ -46,19 +50,36 @@ void mousePressed() {
   
   //Handle button presses
   if (numberButton.overButton()) {
-    activeKeyboard = numberKeyboard;
-  } 
-  else if (emojiButton.overButton()) {
-    activeKeyboard = emojiKeyboard;
+    if (activeKeyboard instanceof NumberSymbol) {
+      activeKeyboard = alphabetKeyboard;
+    } else {
+      activeKeyboard = numberSymbolKeyboard;
+    }
+  } else if (emojiButton.overButton()) {
+    if (activeKeyboard instanceof Emoji) {
+      activeKeyboard = alphabetKeyboard;
+    } else {
+      activeKeyboard = emojiKeyboard;
+    }
   } else {
     // Handle input
     if (activeKeyboard instanceof Alphabet) {
-      text += activeKeyboard.handleInput();
-    } else if (activeKeyboard instanceof Number) {
-      text += activeKeyboard.handleInput();
-      activeKeyboard = alphabetKeyboard;
-    } else {
-      String result = activeKeyboard.handleInput();
+      // If alphabet keyboard simply handleInput
+      text += activeKeyboard.handleInput(0, 0, 1);
+    } else if (activeKeyboard instanceof NumberSymbol) {
+      // If NumberSymbol keyboard handle zoom, then selection
+      if (zoom) {
+        // If already zoomed type selected key then switch keyboards
+        text += activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
+        activeKeyboard = alphabetKeyboard;
+        zoom = false;
+      } else {
+        zoom = true;
+        zoomX = (width/2) - mouseX*2;
+        zoomY = (height/2) - mouseY*2;
+      }
+    } else if (activeKeyboard instanceof Emoji) {
+      String result = activeKeyboard.handleInput(0, 0, 0);
       int hexVal = Integer.parseInt(result.substring(2), 16);
       text += (char)hexVal;
       activeKeyboard = alphabetKeyboard;

@@ -14,16 +14,17 @@ class Key {
 
   void display() {
     rectMode(CORNERS);
-    stroke(150);
-    fill(100);
+    stroke(0);
+    fill(225);
     rect(startX, startY, endX, endY);
-    textSize(16);
+    textSize(25);
     fill(0);
     String val = value;
     if (isCapital) {
       val = val.toUpperCase();
     }
-    text(val, startX, endY); 
+    float midY = startY + (endY - startY)/2;
+    text(val, startX, midY); 
   }
   
   String printKey() {
@@ -33,8 +34,9 @@ class Key {
     return value;
   }
   
-  boolean overKey() {
-   if (mouseX >= startX && mouseX <= endX && mouseY >= startY && mouseY <= endY) {
+  boolean overKey(float xOffset, float yOffset, int zoomScale) {
+   if (mouseX >= (startX*zoomScale) + xOffset && mouseX <= (endX*zoomScale) + xOffset
+     && mouseY >= (startY*zoomScale) + yOffset && mouseY <= (endY*zoomScale) + yOffset) {
      return true;
    } else {
      return false;

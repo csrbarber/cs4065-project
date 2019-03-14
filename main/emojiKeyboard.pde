@@ -67,7 +67,6 @@ class Emoji implements Keyboard {
     rows.add(seventhRow);
     rows.add(eighthRow);
 
-    
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {
@@ -80,10 +79,10 @@ class Emoji implements Keyboard {
     return keys;
   }
   
-  String handleInput() {
+  String handleInput(float xOffset, float yOffset, int zoomScale) {
     String ret = "";
     for (Key kkey : getKeys()) {
-      if (kkey.overKey()) {
+      if (kkey.overKey(xOffset, yOffset, zoomScale)) {
         ret = kkey.printKey();
         break;
       }

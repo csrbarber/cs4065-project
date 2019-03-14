@@ -2,7 +2,6 @@ class EmojiKey extends Key{
   PImage img;
   String filePath;
   
-
   EmojiKey(float startX, float startY, float endX, float endY, String value) {
     super(startX, startY, endX, endY, value);
     this.filePath = "Emojis/" + value;
@@ -25,5 +24,4 @@ class EmojiKey extends Key{
     else
       return value.substring(0, 5);
   }
-   
 }
