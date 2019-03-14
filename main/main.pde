@@ -31,7 +31,8 @@ void draw() {
   background(209, 214, 218);
   textSize(32);
   fill(0);
-  text(text, 50, 50);
+  // TODO Text scrolling & wrapping
+  text(text, 10, 40);
   clearTextButton.display();
   numberButton.display();
   activeKeyboard.display(); //<>//

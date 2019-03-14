@@ -61,10 +61,12 @@ class Alphabet implements Keyboard {
           }
         } else {
           ret = kkey.printKey();
+          isCapital = false;
           break;
         }
       }
     }
+    
     return ret;
   }
 }

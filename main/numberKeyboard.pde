@@ -43,9 +43,6 @@ class NumberSymbol implements Keyboard {
     String ret = "";
     for (Key kkey : getKeys()) {
       if (kkey.overKey(xOffset, yOffset, zoomScale)) {
-        print(xOffset + "xOffset\n");
-        print(yOffset + "yOffset\n");
-        print(zoomScale + "zoomScale\n");
         ret = kkey.printKey();
         break;
       }

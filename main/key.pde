@@ -17,7 +17,7 @@ class Key {
     stroke(0);
     fill(225);
     rect(startX, startY, endX, endY);
-    textSize(20);
+    textSize(25);
     fill(0);
     String val = value;
     if (isCapital) {
@@ -37,7 +37,6 @@ class Key {
   boolean overKey(float xOffset, float yOffset, int zoomScale) {
    if (mouseX >= (startX*zoomScale) + xOffset && mouseX <= (endX*zoomScale) + xOffset
      && mouseY >= (startY*zoomScale) + yOffset && mouseY <= (endY*zoomScale) + yOffset) {
-       print("mouseX: " + mouseX + "mouseY: " + mouseY + "\n");
      return true;
    } else {
      return false;
