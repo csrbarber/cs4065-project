@@ -52,7 +52,14 @@ void mousePressed() {
     activeKeyboard = emojiKeyboard;
   } else {
     // Handle input
-    text += activeKeyboard.handleInput();
+    String result = activeKeyboard.handleInput();
+    if(result.substring(0, 2).equals("\\u"))
+    {
+      int hexVal = Integer.parseInt(result.substring(2), 16);
+      text += (char)hexVal;
+    }
+    else
+      text += activeKeyboard.handleInput();
     activeKeyboard = alphabetKeyboard;
   }
   
