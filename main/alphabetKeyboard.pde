@@ -34,7 +34,6 @@ class Alphabet implements Keyboard {
     rows.add(thirdRow);
     rows.add(fourthRow);
 
-    
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {

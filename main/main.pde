@@ -52,20 +52,16 @@ void mousePressed() {
     activeKeyboard = emojiKeyboard;
   } else {
     // Handle input
-    String result = activeKeyboard.handleInput();
-    if(result.substring(0, 2).equals("\\u"))
-    {
+    if (activeKeyboard instanceof Alphabet) {
+      text += activeKeyboard.handleInput();
+    } else if (activeKeyboard instanceof Number) {
+      text += activeKeyboard.handleInput();
+      activeKeyboard = alphabetKeyboard;
+    } else {
+      String result = activeKeyboard.handleInput();
       int hexVal = Integer.parseInt(result.substring(2), 16);
       text += (char)hexVal;
+      activeKeyboard = alphabetKeyboard;
     }
-    else
-      text += activeKeyboard.handleInput();
-    activeKeyboard = alphabetKeyboard;
   }
-  
-  zoom = true;
-}
-
-void mouseReleased() {
-  zoom = false;
 }
