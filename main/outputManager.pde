@@ -4,15 +4,14 @@ class OutputManager {
   float xPos, yPos, spacing;
   
   // TODO Should be able to scroll, therefore no endY
-  // No need for both xPos/yPos and startX/startY
-  OutputManager(float startX, float startY, float endX, float endY, float spacing, float xPos, float yPos) {
+  OutputManager(float startX, float startY, float endX, float endY, float spacing) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
     this.endY = endY;
     this.spacing = spacing;
-    this.xPos = xPos;
-    this.yPos = yPos;
+    this.xPos = startX;
+    this.yPos = startY;
     this.outputs = new ArrayList<Output>();
   }
   
@@ -24,7 +23,7 @@ class OutputManager {
   }
   
   void addEmojiOutput(PImage img) {
-    outputs.add(new EmojiOutput(xPos, yPos, img));
+    outputs.add(new EmojiOutput(xPos, yPos -25, img));
     xPos += spacing;
   }
   
@@ -32,5 +31,10 @@ class OutputManager {
     for (Output o : outputs) {
       o.display();
     }
+  }
+  
+  void clearText() {
+    outputs.clear();
+    xPos = startX;
   }
 }

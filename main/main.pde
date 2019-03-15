@@ -28,7 +28,7 @@ void setup() {
   numberButton = new Button(50, 725, 150, 775, "0-9");
   emojiButton = new EmojiButton(150, 725, 250, 775, "smirking-face_1f60f.png");
   clearTextButton = new Button(350, 725, 450, 775, "Clear");
-  outputManager = new OutputManager(10, 40, 460, 400, 25, 10, 40);
+  outputManager = new OutputManager(10, 40, 460, 400, 25);
 }
 
 void draw() {
@@ -44,8 +44,7 @@ void draw() {
 
 void mousePressed() {
   if (clearTextButton.overButton()) {
-    // TODO outputManager.clearText();
-    text = "";
+    outputManager.clearText();
   } else if (numberButton.overButton()) {
     if (activeKeyboard instanceof NumberSymbol) {
       activeKeyboard = alphabetKeyboard;
