@@ -60,7 +60,7 @@ class Emoji implements Keyboard {
     rows.add(sixthRow);
     rows.add(seventhRow);
     rows.add(eighthRow);
-    
+     
     float hDiv = (endY - startY)/rows.size();
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
@@ -74,14 +74,19 @@ class Emoji implements Keyboard {
     return keys;
   }
   
-  String handleInput(float xOffset, float yOffset, int zoomScale) {
-    String ret = "";
+  PImage handleClick(float xOffset, float yOffset, int zoomScale) {
+    PImage ret = null;
     for (Key kkey : getKeys()) {
       if (kkey.overKey(xOffset, yOffset, zoomScale)) {
-        ret = kkey.printKey();
+        ret = ((EmojiKey)kkey).printEmoji();
         break;
       }
     }
-    return (new StringBuilder()).append("\\").append("u").append(ret).toString();
+    return ret;
+  }
+  
+  String handleInput(float xOffset, float yOffset, int zoomScale) {
+    // Just trying to fix things up before video
+    return "";
   }
 }

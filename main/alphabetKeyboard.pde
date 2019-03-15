@@ -69,4 +69,8 @@ class Alphabet implements Keyboard {
     
     return ret;
   }
+  
+  PImage handleClick(float xOffset, float yOffset, int zoomScale) {
+    return null;
+  }
 }
