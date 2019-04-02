@@ -97,7 +97,8 @@ void handleTextInput() {
         outputManager.addTextOutput(activeKeyboard.handleInput(zoomX, zoomY, zoomScale));
       } else {
         // TODO I need the Emoji path here for individual zoom click logging
-        outputManager.addEmojiOutput(activeKeyboard.handleClick(zoomX, zoomY, zoomScale));
+        EmojiKey kkey = activeKeyboard.handleClick(zoomX, zoomY, zoomScale);
+        outputManager.addEmojiOutput(kkey);
       }
       activeKeyboard = alphabetKeyboard;
       zoom = false;
