@@ -28,7 +28,7 @@ void setup() {
   numberButton = new Button(50, 725, 150, 775, "0-9");
   emojiButton = new EmojiButton(150, 725, 250, 775, "smirking-face_1f60f.png");
   clearTextButton = new Button(350, 725, 450, 775, "Clear");
-  outputManager = new OutputManager(10, 40, 460, 400, 25);
+  outputManager = new OutputManager(10, 40, 460, 400, 25, 35);
 }
 
 void draw() {
