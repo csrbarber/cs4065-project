@@ -15,8 +15,11 @@ class EmojiKey extends Key {
     image(img, startX + ((endX-startX)/4), startY, (endX-startX)/2, (endX-startX)/2);
   }
   
-  // TODO printKey doesn't work for EmojiKey 
   PImage printEmoji() {
     return img;
+  }
+  
+  String getImagePath() {
+    return value;
   }
 }
