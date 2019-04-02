@@ -1,5 +1,6 @@
 String text;
-Button clearTextButton, numberButton;
+Button clearTextButton, numberButton, emojiButton;
+Emoji emojiKeyboard;
 Alphabet alphabetKeyboard;
 NumberSymbol numberSymbolKeyboard;
 Keyboard activeKeyboard;
@@ -18,6 +19,8 @@ void setup() {
   zoomScale = 2;
   alphabetKeyboard = new Alphabet(0, 300, 480, 700);
   numberSymbolKeyboard = new NumberSymbol(0, 300, 480, 700);
+  emojiKeyboard = new Emoji(0, 300, 800, 700);
+  emojiButton = new EmojiButton(150, 725, 250, 775, "smirking-face_1f60f.png");
   numberButton = new Button(50, 725, 150, 775, "0-9");
   clearTextButton = new Button(350, 725, 450, 775, "Clear");
   activeKeyboard = alphabetKeyboard;
@@ -35,8 +38,9 @@ void draw() {
   // TODO Text scrolling & wrapping
   text(text, 10, 40);
   clearTextButton.display();
+  emojiButton.display();
   numberButton.display();
-  activeKeyboard.display(); //<>//
+  activeKeyboard.display();
 }
 
 void mousePressed() {
@@ -51,9 +55,19 @@ void mousePressed() {
     } else {
       activeKeyboard = numberSymbolKeyboard;
     }
+  } else if (emojiButton.overButton()) {
+    if (activeKeyboard instanceof Emoji) {
+      activeKeyboard = alphabetKeyboard;
+    } else {
+      activeKeyboard = emojiKeyboard;
+    }
   } else {
     // Handle input
-    if (activeKeyboard instanceof NumberSymbol) {
+    if (activeKeyboard instanceof Alphabet) {
+      // If alphabet keyboard simply handleInput
+      text += activeKeyboard.handleInput(0, 0, 1);
+    } else if (activeKeyboard instanceof NumberSymbol) {
+      // If NumberSymbol keyboard handle zoom, then selection
       if (zoom) {
         // If already zoomed type selected key then switch keyboards
         text += activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
@@ -64,9 +78,11 @@ void mousePressed() {
         zoomX = (width/2) - mouseX*2;
         zoomY = (height/2) - mouseY*2;
       }
-    } else {
-      // If alphabetKeyboard simply handleInput
-      text += activeKeyboard.handleInput(0, 0, 1);
+    } else if (activeKeyboard instanceof Emoji) {
+      String result = activeKeyboard.handleInput(0, 0, 0);
+      int hexVal = Integer.parseInt(result.substring(2), 16);
+      text += (char)hexVal;
+      activeKeyboard = alphabetKeyboard;
     }
   }
 }

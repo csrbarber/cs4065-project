@@ -9,7 +9,7 @@ class Button {
     this.endY = endY;
     this.text = text;
   }
-
+  
   void display() {
     rectMode(CORNERS);
     stroke(0);
