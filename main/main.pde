@@ -96,12 +96,16 @@ void handleTextInput() {
       // If already zoomed type selected key then switch keyboards
       if (activeKeyboard instanceof NumberSymbol) {
         String input = activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
-        outputManager.addTextOutput(input);
-        println("ZOOM TIME: " + zoomTime + " FOR CHARACTER: " + input);
+        if (!input.equals("")) {
+          outputManager.addTextOutput(input);
+          println("ZOOM TIME: " + zoomTime + " FOR CHARACTER: " + input);
+        }
       } else {
         EmojiKey kkey = activeKeyboard.handleClick(zoomX, zoomY, zoomScale);
-        outputManager.addEmojiOutput(kkey.img, kkey.value);
-        println("ZOOM TIME: " + zoomTime + " FOR EMOJI: " + kkey.value);
+        if (kkey != null) {
+          outputManager.addEmojiOutput(kkey.img, kkey.value);
+          println("ZOOM TIME: " + zoomTime + " FOR EMOJI: " + kkey.value);
+        }
       }
       activeKeyboard = alphabetKeyboard;
       zoom = false;
