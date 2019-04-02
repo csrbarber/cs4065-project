@@ -1,21 +1,25 @@
 class Key {
   float startX, startY,  endX, endY;
   String value;
-  boolean isCapital;
+  boolean isCapital, isLandmark;
 
-  Key(float startX, float startY, float endX, float endY, String value) {
+  Key(float startX, float startY, float endX, float endY, String value, boolean landmark) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
     this.endY = endY;
     this.value = value;
+    this.isLandmark = landmark;
     this.isCapital = false;
   }
 
   void display() {
     rectMode(CORNERS);
     stroke(0);
-    fill(225);
+    if(isLandmark)
+      fill(250);
+    else
+      fill(225);
     rect(startX, startY, endX, endY);
     textSize(25);
     fill(0);

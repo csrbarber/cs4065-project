@@ -34,7 +34,6 @@ class EmojiOutput extends Output {
   
   void display() {
     // determine c & d params on image (so the image isn't full size)
-    if(img != null)
-      image(img, startX, startY, 20, 20);
+    image(img, startX, startY, 20, 20);
   }
 }
