@@ -1,19 +1,19 @@
 class Emoji implements Keyboard {
   float startX, startY,  endX, endY;
-  ArrayList<Key> keys;
+  ArrayList<EmojiKey> keys;
 
   Emoji(float startX, float startY, float endX, float endY) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
     this.endY = endY;
-    this.keys = new ArrayList<Key>();
+    this.keys = new ArrayList<EmojiKey>();
     initializeKeys();
   }
 
   void display() {
-    for (Key kkey : keys) {
-      ((EmojiKey)kkey).display();
+    for (EmojiKey kkey : keys) {
+      kkey.display();
     }
   }
   
@@ -73,23 +73,21 @@ class Emoji implements Keyboard {
     }
   }
   
-  ArrayList<Key> getKeys() {
+  ArrayList<EmojiKey> getKeys() {
     return keys;
   }
   
-  PImage handleClick(float xOffset, float yOffset, int zoomScale) {
-    PImage ret = null;
-    for (Key kkey : getKeys()) {
+  EmojiKey handleClick(float xOffset, float yOffset, int zoomScale) {
+    EmojiKey ret = null;
+    for (EmojiKey kkey : getKeys()) {
       if (kkey.overKey(xOffset, yOffset, zoomScale)) {
-        ret = ((EmojiKey)kkey).printEmoji();
-        break;
+        ret = kkey;
       }
     }
     return ret;
   }
   
   String handleInput(float xOffset, float yOffset, int zoomScale) {
-    // Just trying to fix things up before video
     return "";
   }
 }
