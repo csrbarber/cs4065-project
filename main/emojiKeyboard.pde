@@ -18,7 +18,6 @@ class Emoji implements Keyboard {
   }
   
   void initializeKeys() {
-    // Vaishu: will add all of the other emojis once we can get the first row to print out properly
     String[] firstRow = new String[]{"1f61e.png", "1f618.png", "1f92e.png", "1f61c.png",  
                                       "1f951.png", "1f351.png", "1f34e.png", "1f34c.png",
                                      "1f3e5.png", "1f6a6.png", "1f6b2.png", "1f6f4.png", 
@@ -66,8 +65,9 @@ class Emoji implements Keyboard {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {
           boolean ifLandmark = false;
-          if((i%4==1) && (j%4==1))
+          if((i%4==1) && (j%4==1)) {
             ifLandmark = true;
+          }
           keys.add(new EmojiKey(startX + wDiv*j, startY + hDiv*i, startX + wDiv*(j+1), startY + hDiv*(i+1), rows.get(i)[j], ifLandmark));
         }
     }
