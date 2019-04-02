@@ -75,12 +75,13 @@ class Emoji implements Keyboard {
   }
   
   EmojiKey handleClick(float xOffset, float yOffset, int zoomScale) {
-    PImage ret = null;
+    EmojiKey ret = null;
     for (EmojiKey kkey : getKeys()) {
       if (kkey.overKey(xOffset, yOffset, zoomScale)) {
-        return kkey;
+        ret = kkey;
       }
     }
+    return ret;
   }
   
   String handleInput(float xOffset, float yOffset, int zoomScale) {

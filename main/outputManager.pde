@@ -27,12 +27,12 @@ class OutputManager {
     }      
   }
   
-  void addEmojiOutput(PImage img) {
+  void addEmojiOutput(PImage img, String fileName) {
     if (outputs.size() != 0 && outputs.size() % 18 == 0) {
       yPos += ySpacing;
       xPos = startX;
     }
-    outputs.add(new EmojiOutput(xPos, yPos -25, img));
+    outputs.add(new EmojiOutput(xPos, yPos -25, img, fileName));
     xPos += xSpacing;
   }
   
@@ -40,6 +40,14 @@ class OutputManager {
     for (Output o : outputs) {
       o.display();
     }
+  }
+  
+  String getOutput() {
+    String ret = "";
+    for (Output o : outputs) {
+      ret += o.getText();
+    }
+    return ret;
   }
   
   void newLine() {

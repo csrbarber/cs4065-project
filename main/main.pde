@@ -1,5 +1,5 @@
 boolean zoom;
-int zoomScale, startTime;
+int zoomScale, startTime, zoomStartTime;
 float zoomX, zoomY;
 String text;
 
@@ -48,11 +48,11 @@ void mousePressed() {
       timeTextButton.text = "Finish";
     } else {
       timeTextButton.text = "Start";
-      outputManager.clearText();
       int sentenceTime = millis() - startTime;
       println("SENTENCE TIME: " + sentenceTime);
-      println("TODO The entire outputManager including emoji paths");
+      println("SENTENCE: " + outputManager.getOutput());
     }
+    outputManager.clearText();
   } else if (numberButton.overButton()) {
     if (activeKeyboard instanceof NumberSymbol) {
       activeKeyboard = alphabetKeyboard;
@@ -92,17 +92,21 @@ void handleTextInput() {
   } else {
     // Handle zoom-able keyboards (NumberSymbol & Emoji)
     if (zoom) {
+      int zoomTime = millis() - zoomStartTime;
       // If already zoomed type selected key then switch keyboards
       if (activeKeyboard instanceof NumberSymbol) {
-        outputManager.addTextOutput(activeKeyboard.handleInput(zoomX, zoomY, zoomScale));
+        String input = activeKeyboard.handleInput(zoomX, zoomY, zoomScale);
+        outputManager.addTextOutput(input);
+        println("ZOOM TIME: " + zoomTime + " FOR CHARACTER: " + input);
       } else {
-        // TODO I need the Emoji path here for individual zoom click logging
         EmojiKey kkey = activeKeyboard.handleClick(zoomX, zoomY, zoomScale);
-        outputManager.addEmojiOutput(kkey);
+        outputManager.addEmojiOutput(kkey.img, kkey.value);
+        println("ZOOM TIME: " + zoomTime + " FOR EMOJI: " + kkey.value);
       }
       activeKeyboard = alphabetKeyboard;
       zoom = false;
     } else {
+      zoomStartTime = millis();
       // Set zoom in params
       zoom = true;
       zoomX = (width/2) - mouseX*2;

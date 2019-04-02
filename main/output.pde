@@ -7,6 +7,7 @@ abstract class Output {
   }
   
   abstract void display();
+  abstract String getText();
 }
 
 class TextOutput extends Output {
@@ -22,17 +23,27 @@ class TextOutput extends Output {
     fill(0);
     text(text, startX, startY);
   }
+  
+  String getText() {
+    return text;
+  }
 }
 
 class EmojiOutput extends Output {
   PImage img;
+  String fileName;
   
-  EmojiOutput(float startX, float startY, PImage img) {
+  EmojiOutput(float startX, float startY, PImage img, String fileName) {
     super(startX, startY);
     this.img = img;
+    this.fileName = fileName;
   }
   
   void display() {
     image(img, startX, startY, 20, 20);
+  }
+  
+  String getText() {
+    return fileName;
   }
 }
