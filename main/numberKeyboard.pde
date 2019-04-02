@@ -18,7 +18,6 @@ class NumberSymbol implements Keyboard {
   }
   
   void initializeKeys() {
-    float hDiv = (endY - startY)/4;
     String[] firstRow = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "[", "]", "{", "}", "#", "%", "^", "*", "+", "="};
     String[] secondRow = new String[]{"-", "/", ":", ";", "(", ")", "$", "&", "@", "\"", "_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"};
     String[] thirdRow = new String[]{".", ",", "?", "!", "'"};
@@ -27,6 +26,7 @@ class NumberSymbol implements Keyboard {
     rows.add(secondRow);
     rows.add(thirdRow);
     
+    float hDiv = (endY - startY)/rows.size();
     for (int i = 0; i < rows.size(); i++) {
         float wDiv = (endX - startX)/rows.get(i).length;
         for (int j = 0; j < rows.get(i).length; j++) {
@@ -48,5 +48,9 @@ class NumberSymbol implements Keyboard {
       }
     }
     return ret;
+  }
+  
+  PImage handleClick(float xOffset, float yOffset, int zoomScale) {
+    return null;
   }
 }
