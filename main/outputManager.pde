@@ -3,7 +3,6 @@ class OutputManager {
   ArrayList<Output> outputs;
   float xPos, yPos, xSpacing, ySpacing;
   
-  // TODO Should be able to scroll, therefore no endY
   OutputManager(float startX, float startY, float endX, float endY, float xSpacing, float ySpacing) {
     this.startX = startX;
     this.startY = startY;
@@ -16,15 +15,16 @@ class OutputManager {
     this.outputs = new ArrayList<Output>();
   }
   
-  // Should make it so this (manager) assigns spacing (Half-done)
-  // TODO Need var for ySpacing, and to deal with wrapping/overlap
   void addTextOutput(String text) {
-    if (outputs.size() != 0 && outputs.size() % 18 == 0) {
-      yPos += ySpacing;
-      xPos = startX;
-    }
-    outputs.add(new TextOutput(xPos, yPos, text));
-    xPos += xSpacing;
+    if (!text.equals("")) {
+      // Handle shift click
+      if (outputs.size() != 0 && outputs.size() % 18 == 0) {
+        yPos += ySpacing;
+        xPos = startX;
+      }
+      outputs.add(new TextOutput(xPos, yPos, text));
+      xPos += xSpacing;
+    }      
   }
   
   void addEmojiOutput(PImage img) {
@@ -40,6 +40,11 @@ class OutputManager {
     for (Output o : outputs) {
       o.display();
     }
+  }
+  
+  void newLine() {
+    yPos += ySpacing;
+    xPos = startX;
   }
   
   void clearText() {

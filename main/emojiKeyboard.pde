@@ -86,7 +86,6 @@ class Emoji implements Keyboard {
   }
   
   String handleInput(float xOffset, float yOffset, int zoomScale) {
-    // Just trying to fix things up before video
     return "";
   }
 }
