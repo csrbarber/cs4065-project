@@ -26,11 +26,11 @@ class Emoji implements Keyboard {
                                       "1f355.png", "1f354.png", "1f336.png", "1f346.png",
                                       "26ea.png", "26f5.png", "2708.png",  "1f3e1.png", 
                                       "1f31e.png", "1f31d.png", "1f319.png", "1f30f.png"};
-    String[] thirdRow = new String[]{"1f642.png", "1f60d.png", "1f970.png", "1f60e.png", 
+    String[] thirdRow = new String[]{"1f642.png", "1f60d.png", "1f970.png", "1f44d.png", 
                                       "1f370.png", "1f366.png", "1f371.png", "1f373.png",
                                      "1f54c.png", "1f680.png", "1f682.png", "1f691.png", 
                                      "1f436.png", "1f431.png", "1f435.png", "1f4a6.png"};
-    String[] fourthRow = new String[]{"1f60f.png", "1f612.png", "1f609.png", "1f60e.png",
+    String[] fourthRow = new String[]{"1f60a.png", "1f612.png", "1f609.png", "1f60e.png",
                                       "1f37e.png", "2615.png", "1f37a.png", "1f369.png",
                                       "1f692.png", "1f693.png", "1f695.png", "1f697.png", 
                                       "1f384.png", "1f333.png", "1f40d.png", "1f425.png"};   
