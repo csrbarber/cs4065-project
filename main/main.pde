@@ -12,23 +12,24 @@ OutputManager outputManager;
 
 void setup() {
   // Dimensions of test Android phone (Samsung J1)
-  size(480, 800);
+  // 480, 800
+  size(displayWidth, displayHeight);
   background(209, 214, 218);
   zoom = false;
   text = "";
   zoomScale = 2;
   
   // Initialize keyboards
-  alphabetKeyboard = new Alphabet(0, 300, 480, 700);
-  numberSymbolKeyboard = new NumberSymbol(0, 300, 480, 700);
-  emojiKeyboard = new Emoji(0, 300, 480, 700);
+  alphabetKeyboard = new Alphabet(0, displayHeight*0.4, displayWidth, displayHeight*0.85);
+  numberSymbolKeyboard = new NumberSymbol(0, displayHeight*0.4, displayWidth, displayHeight*0.85);
+  emojiKeyboard = new Emoji(0, displayHeight*0.4, displayWidth, displayHeight*0.85);
   activeKeyboard = alphabetKeyboard;
   
   // Initialize buttons
-  numberButton = new Button(50, 725, 150, 775, "0-9");
-  emojiButton = new EmojiButton(150, 725, 250, 775, "smirking-face_1f60f.png");
-  timeTextButton = new Button(350, 725, 450, 775, "Start");
-  outputManager = new OutputManager(10, 40, 460, 400, 25, 35);
+  numberButton = new Button(displayWidth*0.1, displayHeight*0.9, displayWidth*0.3, displayHeight*0.95, "0-9");
+  emojiButton = new EmojiButton(displayWidth*0.3, displayHeight*0.9, displayWidth*0.5, displayHeight*0.95, "smirking-face_1f60f.png");
+  timeTextButton = new Button(displayWidth*0.7, displayHeight*0.9, displayWidth*0.9, displayHeight*0.95, "Start");
+  outputManager = new OutputManager(displayWidth*0.1, displayHeight*0.05, displayWidth*0.95, displayHeight*0.5, 25, 35, int(displayWidth*0.03));
 }
 
 void draw() {
